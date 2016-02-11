@@ -9,7 +9,7 @@
 		<rosparam param="pins/B">38</rosparam>
 		<rosparam param="pins/S">13</rosparam>
 		<rosparam param="device_name" subst_value="True">$(arg encoder1_name)</rosparam>
-		<rosparam param="topic" subst_value="True">$(arg encoder1_name)</rosparam>
+		<rosparam param="topic" subst_value="True">rwheel</rosparam>
 	</node>
 	
 	<node pkg="tara_firmware" type="system_setup.py" name="$(arg encoder2_name)" args="$(arg encoder2_name)" output="screen">
@@ -17,7 +17,7 @@
 		<rosparam param="pins/B">12</rosparam>
 		<rosparam param="pins/S">15</rosparam>
 		<rosparam param="device_name" subst_value="True">$(arg encoder2_name)</rosparam>
-		<rosparam param="topic" subst_value="True">$(arg encoder2_name)</rosparam>
+		<rosparam param="topic" subst_value="True">lwheel</rosparam>
 	</node>
 
 	<arg name="device_name" value="/dev/ttyACM0"/>

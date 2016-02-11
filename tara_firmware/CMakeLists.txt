@@ -165,7 +165,11 @@ target_link_libraries(tf_broadcaster ${catkin_LIBRARIES})
 ## Mark executable scripts (Python etc.) for installation
 ## in contrast to setup.py, you can choose the destination
 install(PROGRAMS
-    scripts/system_setup.py
+	scripts/system_setup.py
+	scripts/pid_velocity.py
+	scripts/virtual_joystick.py
+	scripts/twist_to_motors.py
+	scripts/diff_tf.py
 	DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
 

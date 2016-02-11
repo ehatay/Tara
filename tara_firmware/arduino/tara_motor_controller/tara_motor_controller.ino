@@ -7,19 +7,21 @@ ros::NodeHandle nh;
 
 /* Right motor */
 const int motor1_l_pwm = 5;
-const int motor1__l_en = 3;
+const int motor1_l_en = 3;
 const int motor1_r_en = 4;
 const int motor1_r_pwm = 6;
 
 boolean motor1_stopped = true;
 boolean motor1_enabled = false;
+boolean motor1_forward;
 
 /* Left motor */
 const int motor2_l_pwm = 10;
-const int motor2__l_en = 8;
+const int motor2_l_en = 8;
 const int motor2_r_en = 9;
 const int motor2_r_pwm = 11;
 
+boolean motor2_forward;
 boolean motor2_stopped = true;
 boolean motor2_enabled = false;
 

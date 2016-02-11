@@ -1,6 +1,7 @@
 #include <ros.h>
 #include <std_msgs/Int16.h>
 #include <std_msgs/Bool.h>
+#include <std_msgs/Float32.h>
 
 ros::NodeHandle nh;
 
@@ -164,6 +165,11 @@ ros::Subscriber<std_msgs::Int16> sub_motor1_signal("tara_firmware/motor1/signal"
 
 ros::Subscriber<std_msgs::Bool> sub_motor2_state("tara_firmware/motor2/change_state", &motor2_state );
 ros::Subscriber<std_msgs::Bool> sub_motor1_state("tara_firmware/motor1/change_state", &motor1_state );
+
+//std_msgs::Float32 battery1_v, battery2_v;
+//ros::Publisher battery1_voltage_pub("tara_firmware/battery1_voltage", &battery1_v);
+//ros::Publisher battery2_voltage_pub("tara_firmware/battery2_voltage", &battery2_v);
+
 void setup()
 {
   pinMode(motor1_pwm, OUTPUT);
@@ -172,6 +178,9 @@ void setup()
   pinMode(motor2_en, OUTPUT);
   pinMode(motor1_dir, OUTPUT);
   pinMode(motor2_dir, OUTPUT);
+  
+  //pinMode(A0, INPUT);
+  //pinMode(A1, INPUT);
   
   digitalWrite(motor1_en, LOW);
   digitalWrite(motor2_en, LOW);
@@ -183,10 +192,17 @@ void setup()
   nh.subscribe(sub_motor2_signal);
   nh.subscribe(sub_motor1_state);
   nh.subscribe(sub_motor2_state);
+
+  //nh.advertise(battery1_voltage_pub);
+  //nh.advertise(battery2_voltage_pub);
 }
 
 void loop()
 {
+  //battery1_v.data = (analogRead(A0) * 5.0 / 1024.0) / (7500.0/(37500.0));
+  //battery2_v.data = (analogRead(A1) * 5.0 / 1024.0) / (7500.0/(37500.0));
+  //battery1_voltage_pub.publish(&battery1_v);
+  //battery2_voltage_pub.publish(&battery2_v);
   nh.spinOnce();
   delay(1);
 }

@@ -34,8 +34,8 @@ def check_cmd(cmd):
 	elif(len(splitted) == 2):
 		vel = Twist()
 		try:
-			vel.angular.z = valmap(float(splitted[0]), 90, 270, -1, 1)
-			vel.linear.x = float(splitted[1].split('\r')[0]) / 50
+			vel.angular.z = valmap(float(splitted[0]), -100, 100, -1, 1)
+			vel.linear.x = float(splitted[1].split('\r')[0]) / 100
 		except(Exception):
 			pass
 		return vel
@@ -53,7 +53,7 @@ import rospy
 from geometry_msgs.msg import Twist
 
 rospy.init_node('tara_controller')
-pub = rospy.Publisher('/turtle1/cmd_vel', Twist, queue_size=10)
+pub = rospy.Publisher('/tara_app/bluetooth_received', Twist, queue_size=10)
 rate = rospy.Rate(10)
 get_ip()
 

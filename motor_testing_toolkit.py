@@ -18,20 +18,20 @@ class motor_test_ui:
         self.motor1_state_pub = rospy.Publisher('tara_firmware/motor1/change_state', Bool, queue_size = 1)
         self.motor2_state_pub = rospy.Publisher('tara_firmware/motor2/change_state', Bool, queue_size = 1)
 
-        main_frame = Frame(width=800, height=600)
+        main_frame = Frame(width=800, height=480)
         main_frame.pack()
 
-        left_frame = Frame(main_frame, width=800, height=600)
+        left_frame = Frame(main_frame, width=800, height=480)
         left_frame.pack(side=LEFT)
 
-        right_frame = Frame(main_frame, width=400, height=600)
+        right_frame = Frame(main_frame, width=200, height=480)
         right_frame.pack_propagate(0)
         right_frame.pack(side=RIGHT)
 
         self.motor1_label = Label(left_frame, text="Motor1")
         self.motor1_label.pack()
 
-        self.motor1_frame = Frame(left_frame, width=300, height=270, bd=2, background="light slate blue", colormap="new", relief=SUNKEN)
+        self.motor1_frame = Frame(left_frame, width=400, height=200, bd=2, background="light slate blue", colormap="new", relief=SUNKEN)
         self.motor1_frame.pack_propagate(0)
         self.motor1_frame.pack(fill=X, padx=5, pady=5)
 
@@ -50,7 +50,7 @@ class motor_test_ui:
         self.motor2_label = Label(left_frame, text="Motor2")
         self.motor2_label.pack()
 
-        self.motor2_frame = Frame(left_frame, width=300,background="cornsilk2", height=270, bd=2,  colormap="new", relief=SUNKEN)
+        self.motor2_frame = Frame(left_frame, width=400, height=200, background="cornsilk2", bd=2,  colormap="new", relief=SUNKEN)
         self.motor2_frame.pack_propagate(0)
         self.motor2_frame.pack(fill=X, padx=5, pady=5)
         
@@ -95,7 +95,7 @@ class motor_test_ui:
     def base_move(self, state):
         cmd1 = Int16()
         cmd2 = Int16()
-        speed = 40
+        speed = 30
         if(state == 0): # STOP
             cmd1.data = 0
             cmd2.data = 0

@@ -2,7 +2,7 @@ import RPi.GPIO as GPIO
 import time
 import sys,tty,termios,os
 import rospy
-from std_msgs.msg import Int16
+from std_msgs.msg import Int64
 
 class Encoder():
 	def __init__(self, a, b, device_name = "encoder", printToScreen = False, rostopic = ""):
@@ -11,7 +11,7 @@ class Encoder():
 		print device_name + " initiated with topic: " + rostopic
 		if(self.ros):
 			rospy.init_node(device_name + "_processor", anonymous=True)
-			self.publisher = rospy.Publisher(rostopic, Int16, queue_size=10)	
+			self.publisher = rospy.Publisher(rostopic, Int64, queue_size=10)	
 		self.printToScreen = printToScreen
 		self.flag = 0
 		self.name = device_name

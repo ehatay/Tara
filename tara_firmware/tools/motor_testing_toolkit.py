@@ -3,8 +3,9 @@ from std_msgs.msg import Int16, Bool, Float32
 from Tkinter import *
 
 class motor_test_ui:
-    def __init__(self, master):
+    def __init__(self, master, speed):
         self.master = master
+	self.speed = float(speed)
         self.master.title("TARA motor test tool")
         
         self.motor1_enabled = False
@@ -95,7 +96,7 @@ class motor_test_ui:
     def base_move(self, state):
         cmd1 = Float32()
         cmd2 = Float32()
-        speed = 30
+        speed = self.speed
         if(state == 0): # STOP
             cmd1.data = 0
             cmd2.data = 0
@@ -186,7 +187,11 @@ class motor_test_ui:
         print("Exiting motor test tool...")
         self.master.quit()
 
+import sys
+speed = 60;
+if(len(sys.argv) > 1):
+	speed = sys.argv[1]
 rospy.init_node('Motor_test_tool')
 root = Tk()
-my_gui = motor_test_ui(root)
+my_gui = motor_test_ui(root, speed)
 root.mainloop()

@@ -167,7 +167,7 @@ target_link_libraries(tf_broadcaster ${catkin_LIBRARIES})
 install(PROGRAMS
 	scripts/system_setup.py
 	scripts/pid_velocity.py
-	scripts/virtual_joystick.py
+	scripts/motor_state_control.py
 	scripts/twist_to_motors.py
 	scripts/diff_tf.py
 	DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}

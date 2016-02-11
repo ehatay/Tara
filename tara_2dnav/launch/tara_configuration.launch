@@ -1,7 +1,9 @@
 <?xml version="1.0"?>
 
 <launch>
+	<!--
 	<include file="$(find tara_2dnav)/launch/camera.launch"/>
+	-->
 	<include file="$(find tara_firmware)/launch/diff_drive.launch"/>
 	<!-- Tf from base_link -> camera_link-->
 	<node pkg="tara_firmware" type="tf_broadcaster" name="tara_tf_publisher" output="screen"> </node>

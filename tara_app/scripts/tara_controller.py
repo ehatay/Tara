@@ -36,7 +36,7 @@ def check_cmd(cmd):
 		try:
 			vel.angular.z = -float(splitted[0])/50
 			vel.linear.x = (float(splitted[1].split('\r')[0]))/50
-			vel.linear.x /= 1
+			vel.linear.x /= 2
 		except(Exception):
 			pass
 		return vel
@@ -54,7 +54,7 @@ import rospy
 from geometry_msgs.msg import Twist
 
 rospy.init_node('tara_controller')
-pub = rospy.Publisher('/twist', Twist, queue_size=10)
+pub = rospy.Publisher('/cmd_vel', Twist, queue_size=10)
 rate = rospy.Rate(10)
 get_ip()
 

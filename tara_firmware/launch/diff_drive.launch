@@ -11,11 +11,11 @@
       <remap from="wheel_vtarget" to="tara_firmware/wheel2_vtarget"/>
       <remap from="wheel_vel" to="tara_firmware/wheel2_vel"/>
       <rosparam param="Kp">200</rosparam>
-      <rosparam param="Ki">200</rosparam>
+      <rosparam param="Ki">2</rosparam>
       <rosparam param="Kd">0</rosparam>
-      <rosparam param="out_min">-120</rosparam>
-      <rosparam param="out_max">120</rosparam>
-      <rosparam param="rate">30</rosparam>
+      <rosparam param="out_min">-255</rosparam>
+      <rosparam param="out_max">255</rosparam>
+      <rosparam param="rate">10</rosparam>
       <rosparam param="timeout_ticks">4</rosparam>
       <rosparam param="rolling_pts">5</rosparam>
   </node>
@@ -25,26 +25,26 @@
       <remap from="wheel_vtarget" to="tara_firmware/wheel1_vtarget"/>
       <remap from="wheel_vel" to="tara_firmware/wheel1_vel"/>
       <rosparam param="Kp">200</rosparam>
-      <rosparam param="Ki">200</rosparam>
+      <rosparam param="Ki">2</rosparam>
       <rosparam param="Kd">0</rosparam>
-      <rosparam param="out_min">-120</rosparam>
-      <rosparam param="out_max">120</rosparam>
-      <rosparam param="rate">30</rosparam>
+      <rosparam param="out_min">-255</rosparam>
+      <rosparam param="out_max">255</rosparam>
+      <rosparam param="rate">10</rosparam>
       <rosparam param="timeout_ticks">4</rosparam>
       <rosparam param="rolling_pts">5</rosparam>
   </node>
 
-  <!--<node pkg="tara_firmware" type="virtual_joystick.py" name="virtual_joystick" output="screen"/>
+ <!-- <node pkg="tara_firmware" type="motor_state_control.py" name="motor_state_control" output="screen"/>
   -->
   <node pkg="tara_firmware" type="twist_to_motors.py" name="twist_to_motors" output="screen">
-    <rosparam param="base_width">0.3036</rosparam>
+    <rosparam param="base_width">0.8382</rosparam>
   </node>
   <param name="robot_description" textfile="$(find tara_firmware)/tf/tara.urdf" />
 
   <!--<node pkg="rviz" type="rviz" name="rviz" output="screen"/>-->
   <node pkg="tara_firmware" type="diff_tf.py" name="diff_tf">
      <rosparam param="rate">8.0</rosparam>
-     <rosparam param="base_width">0.3036</rosparam>
+     <rosparam param="base_width">0.8382</rosparam>
   </node>
   <node name="robot_state_publisher" pkg="robot_state_publisher" type="state_publisher" /> 
 </launch>

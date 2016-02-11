@@ -41,7 +41,7 @@ class TwistToMotors():
     
         self.pub_lmotor = rospy.Publisher('tara_firmware/wheel2_vtarget', Float32, queue_size=10)
         self.pub_rmotor = rospy.Publisher('tara_firmware/wheel1_vtarget', Float32, queue_size=10)
-        rospy.Subscriber('twist', Twist, self.twistCallback)
+        rospy.Subscriber('cmd_vel', Twist, self.twistCallback)
     
     
         self.rate = rospy.get_param("~rate", 50)

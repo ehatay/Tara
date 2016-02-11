@@ -22,7 +22,7 @@
 import rospy
 import roslib
 
-from std_msgs.msg import Int16
+from std_msgs.msg import Int16, Int64
 from std_msgs.msg import Float32
 from numpy import array
 
@@ -76,7 +76,7 @@ class PidVelocity():
         rospy.logdebug("%s got Kp:%0.3f Ki:%0.3f Kd:%0.3f tpm:%0.3f" % (self.nodename, self.Kp, self.Ki, self.Kd, self.ticks_per_meter))
         
         #### subscribers/publishers 
-        rospy.Subscriber("wheel", Int16, self.wheelCallback) 
+        rospy.Subscriber("wheel", Int64, self.wheelCallback) 
         rospy.Subscriber("wheel_vtarget", Float32, self.targetCallback) 
         self.pub_motor = rospy.Publisher('motor_cmd',Float32, queue_size=10) 
         self.pub_vel = rospy.Publisher('wheel_vel', Float32, queue_size=10)

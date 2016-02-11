@@ -8,7 +8,7 @@ from geometry_msgs.msg import Quaternion
 from geometry_msgs.msg import Twist
 from nav_msgs.msg import Odometry
 from tf.broadcaster import TransformBroadcaster
-from std_msgs.msg import Int16
+from std_msgs.msg import Int64
 
 class DifferentialDriveController():
 
@@ -49,8 +49,8 @@ class DifferentialDriveController():
         self.dr = 0
         self.then = rospy.Time.now()
         
-        rospy.Subscriber("tara_firmware/encoder2", Int16, self.lwheelCallback)
-        rospy.Subscriber("tara_firmware/encoder1", Int16, self.rwheelCallback)
+        rospy.Subscriber("tara_firmware/encoder2", Int64, self.lwheelCallback)
+        rospy.Subscriber("tara_firmware/encoder1", Int64, self.rwheelCallback)
         self.odomPub = rospy.Publisher("odom", Odometry, queue_size=10)
         self.odomBroadcaster = TransformBroadcaster()
         

@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+
+<launch>
+
+	<!--Launch camera topics 
+	<include file="$(find beam_2dnav)/launch/camera.launch"/> 
+	-->
+
+	<!-- Tf from base_link -> camera_link-->
+	<node pkg="tara_tf" type="tf_broadcaster" name="tara_tf_publisher" output="screen"> </node>
+
+	<!-- Calculates Beam's Odometry and publishes Tf from /odom -> base_link -->
+	<node pkg="tara_tf" type="diff_tf.py" name="diff_tf" output="screen">
+		<rosparam param="base_width">0.261</rosparam>
+		<rosparam param="/ticks_meter">121</rosparam>
+		<rosparam param="rate">30</rosparam>
+	</node>
+
+</launch>

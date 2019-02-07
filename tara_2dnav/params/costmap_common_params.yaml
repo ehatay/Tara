@@ -1,0 +1,14 @@
+#If you run the costmap without the plugins parameter,it will automatically create layers based on what costmaps used to do.
+plugins:
+  - {name: static_map, type: "costmap_2d::StaticLayer"}
+  - {name: obstacles,  type: "costmap_2d::ObstacleLayer"}
+  - {name: inflation,  type: "costmap_2d::InflationLayer"}
+
+obstacle_range: 4.0
+raytrace_range: 4.5 
+#footprint: [[0.2159, 0.1778], [0.2159, -0.1778], [-0.2159, -0.1778], [-0.2159, 0.1778]]
+footprint: [[0.1516, 0.2187], [0.1516, -0.2187], [-0.3302, -0.2187], [-0.3302, 0.2187]]
+
+obstacles: 
+  observation_sources: asus_sensor
+  asus_sensor: {sensor_frame: /asus_link, data_type: LaserScan, topic: /scan, marking: true, clearing: true}

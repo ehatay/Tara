@@ -1,0 +1,10 @@
+[Unit]
+Description=TARA Startup Service
+After=multi-user.target
+
+[Service]
+Type=idle
+ExecStart=/bin/bash -c "echo 'Test'"
+
+[Install]
+WantedBy=multi-user.target

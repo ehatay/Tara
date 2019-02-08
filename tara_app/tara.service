@@ -4,7 +4,7 @@ After=multi-user.target
 
 [Service]
 Type=idle
-ExecStart=/bin/bash -c "echo 'Test'"
+	ExecStart=/bin/bash /home/$USER/ros_catkin_ws/Tara/tara_app/autolaunch.sh
 
 [Install]
 WantedBy=multi-user.target

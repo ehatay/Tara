@@ -156,6 +156,7 @@ include_directories(
 install(PROGRAMS
    scripts/trialInfoNode.py
    scripts/beam_docking.py
+   scripts/system_setup.py
    DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
  )
 

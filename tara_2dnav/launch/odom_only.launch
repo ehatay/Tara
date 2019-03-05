@@ -1,10 +1,22 @@
 <?xml version="1.0"?>
-<launch>
-        
-	<node pkg="tara_tf" type="diff_tf.py" name="diff_tf" output="screen">
-		<rosparam param="base_width">0.261</rosparam>
-		<rosparam param="/ticks_meter">121</rosparam>
-		<rosparam param="rate">30</rosparam>
-        </node>
-</launch>
 
+<launch>
+	<arg name="encoder1_name" value="encoder1"/>
+	<arg name="encoder2_name" value="encoder2"/>
+		
+	<node pkg="tara_2dnav" type="system_setup.py" name="$(arg encoder1_name)" args="$(arg encoder1_name)" output="screen">
+		<rosparam param="pins/A">7</rosparam>
+		<rosparam param="pins/B">38</rosparam>
+		<rosparam param="pins/S">13</rosparam>
+		<rosparam param="device_name" subst_value="True">$(arg encoder1_name)</rosparam>
+		<rosparam param="topic" subst_value="True">$(arg encoder1_name)</rosparam>
+	</node>
+	
+	<node pkg="tara_2dnav" type="system_setup.py" name="$(arg encoder2_name)" args="$(arg encoder2_name)" output="screen">
+		<rosparam param="pins/A">11</rosparam>
+		<rosparam param="pins/B">12</rosparam>
+		<rosparam param="pins/S">15</rosparam>
+		<rosparam param="device_name" subst_value="True">$(arg encoder2_name)</rosparam>
+		<rosparam param="topic" subst_value="True">$(arg encoder2_name)</rosparam>
+	</node>
+</launch>

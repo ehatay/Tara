@@ -10,26 +10,37 @@ const int l_motor_pin_b = 11;
 void messageCbLb( const std_msgs::Int16& msg)
 {
   if(msg.data <= 255 || msg.data >= 0)
+  {
+    analogWrite(l_motor_pin_f, 0);
     analogWrite(l_motor_pin_b, msg.data); 
+  }
 }
-
 void messageCbLf( const std_msgs::Int16& msg)
 {
   if(msg.data <= 255 || msg.data >= 0)
+  {
+    analogWrite(l_motor_pin_b, 0);
     analogWrite(l_motor_pin_f, msg.data); 
+  }
 }
 
 void messageCbRf( const std_msgs::Int16& msg)
 {
   if(msg.data <= 255 || msg.data >= 0)
-    analogWrite(l_motor_pin_f, msg.data); 
+  {
+    analogWrite(r_motor_pin_b, 0);
+    analogWrite(r_motor_pin_f, msg.data); 
+  } 
 }
 
 
 void messageCbRb( const std_msgs::Int16& msg)
 {
   if(msg.data <= 255 || msg.data >= 0)
+  {
+    analogWrite(r_motor_pin_f, 0);
     analogWrite(r_motor_pin_b, msg.data); 
+  }
 }
 
 ros::Subscriber<std_msgs::Int16> sublf("hardware/lmotor/forward", &messageCbLf );

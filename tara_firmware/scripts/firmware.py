@@ -22,18 +22,18 @@ class Encoder():
 		self.EncSPin = s
 		GPIO.setwarnings(False)
 		GPIO.setmode(GPIO.BOARD)
-		GPIO.setup(self.EncAPin, GPIO.IN)
-		GPIO.setup(self.EncBPin, GPIO.IN)
-		GPIO.setup(self.EncSPin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-		self.RotaryClear()
+		GPIO.setup(self.EncAPin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+		GPIO.setup(self.EncBPin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+		#GPIO.setup(self.EncSPin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+		#self.RotaryClear()
 
-	def RotaryClear(self):
-		GPIO.add_event_detect(self.EncSPin, GPIO.FALLING, callback=self.clear)
+	#def RotaryClear(self):
+	#	GPIO.add_event_detect(self.EncSPin, GPIO.FALLING, callback=self.clear)
 	
-	def clear(self, ev=None):
-		self.counter = 0
-		self.PublishCounter()
-		time.sleep(1)
+	#def clear(self, ev=None):
+	#	self.counter = 0
+	#	self.PublishCounter()
+	#	time.sleep(1)
 
 	def testLoop(self):
 		while True:

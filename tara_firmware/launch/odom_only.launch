@@ -4,7 +4,7 @@
 	<arg name="encoder1_name" value="encoder1"/>
 	<arg name="encoder2_name" value="encoder2"/>
 		
-	<node pkg="tara_2dnav" type="system_setup.py" name="$(arg encoder1_name)" args="$(arg encoder1_name)" output="screen">
+	<node pkg="tara_firmware" type="system_setup.py" name="$(arg encoder1_name)" args="$(arg encoder1_name)" output="screen">
 		<rosparam param="pins/A">7</rosparam>
 		<rosparam param="pins/B">38</rosparam>
 		<rosparam param="pins/S">13</rosparam>
@@ -12,11 +12,18 @@
 		<rosparam param="topic" subst_value="True">$(arg encoder1_name)</rosparam>
 	</node>
 	
-	<node pkg="tara_2dnav" type="system_setup.py" name="$(arg encoder2_name)" args="$(arg encoder2_name)" output="screen">
+	<node pkg="tara_firmware" type="system_setup.py" name="$(arg encoder2_name)" args="$(arg encoder2_name)" output="screen">
 		<rosparam param="pins/A">11</rosparam>
 		<rosparam param="pins/B">12</rosparam>
 		<rosparam param="pins/S">15</rosparam>
 		<rosparam param="device_name" subst_value="True">$(arg encoder2_name)</rosparam>
 		<rosparam param="topic" subst_value="True">$(arg encoder2_name)</rosparam>
 	</node>
+
+	<arg name="device_name" value="/dev/ttyACM0"/>
+
+	<node pkg="rosserial_python" type="serial_node.py" name="serial_node">
+		<param name="port" value="$(arg device_name)"/>
+	</node>
+
 </launch>

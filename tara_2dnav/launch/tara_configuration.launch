@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 
 <launch>
-	<include file="$(find tara_2dnav)/launch/odom_only.launch"/>
+	<include file="$(find tara_firmware)/launch/odom_only.launch"/>
 	<!-- Tf from base_link -> camera_link-->
 	<node pkg="tara_tf" type="tf_broadcaster" name="tara_tf_publisher" output="screen"> </node>
 </launch>

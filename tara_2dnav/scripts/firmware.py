@@ -65,35 +65,3 @@ class Encoder():
 			print (self.name + ' Counter = %d' % self.counter)
 		if(self.ros):
 			self.publisher.publish(self.counter)
-
-class Controller():
-	def __init__(self):
-		self.CurrentDutyCycle = 56
-		self.minDutyCycle = 6
-		self.PwmOutPin = 35
-		GPIO.setwarnings(False)
-		GPIO.setmode(GPIO.BOARD)
-		GPIO.setup(self.PwmOutPin, GPIO.OUT)
-		self.pwm = GPIO.PWM(self.PwmOutPin, 1000)
-		self.pwm.start(self.CurrentDutyCycle)
-	
-	def loop(self):
-		while True:
-			val = raw_input()
-			if(val == "w"):
-				if(self.CurrentDutyCycle < 100):
-					self.CurrentDutyCycle += 15
-			elif (val == "s"):
-				if(self.CurrentDutyCycle > 6):
-					self.CurrentDutyCycle -= 15
-			elif (val == "b"):
-				self.CurrentDutyCycle = 56
-			else:
-				print("Not accepted value")
-			self.pwm.ChangeDutyCycle(self.CurrentDutyCycle)
-			self.printDutyCycle()
-	
-	def printDutyCycle(self):
-		print("Current Duty Cycle: " + str(self.CurrentDutyCycle))
-			
-

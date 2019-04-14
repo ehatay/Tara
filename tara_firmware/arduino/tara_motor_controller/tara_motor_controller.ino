@@ -125,7 +125,7 @@ void motor2_signal( const std_msgs::Int16& msg)
   }
   else if (msg.data > 0)
   {
-    if(motor2_forward)
+    if(!motor2_forward)
       change_motor_direction(2,true);
   }
   else if (msg.data == 0)

@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<robot name="tara_mobile">
+
+  <link name="base_link">
+    <visual>
+      <geometry>
+        <box size="0.7874 0.6096 0.3"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0.085"/>
+      <material name="white">
+        <color rgba="1 1 1 1"/>
+      </material>
+    </visual>
+  </link>
+
+</robot>

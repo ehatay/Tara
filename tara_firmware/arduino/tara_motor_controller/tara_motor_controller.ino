@@ -97,7 +97,7 @@ void quick_stop_motor(int motor)
   }
 }
 
-void motor1_signal( const std_msgs::Int16& msg)
+void motor1_signal( const std_msgs::Float32& msg)
 {
   int cmd = msg.data;
   if(msg.data < 0)
@@ -117,7 +117,7 @@ void motor1_signal( const std_msgs::Int16& msg)
   analogWrite(motor1_pwm, abs(msg.data));
 }
 
-void motor2_signal( const std_msgs::Int16& msg)
+void motor2_signal( const std_msgs::Float32& msg)
 {
   if(msg.data < 0)
   {
@@ -160,8 +160,8 @@ void motor2_state( const std_msgs::Bool& msg)
     slow_stop_motor(2); 
   }
 }
-ros::Subscriber<std_msgs::Int16> sub_motor2_signal("tara_firmware/motor2/signal", &motor2_signal );
-ros::Subscriber<std_msgs::Int16> sub_motor1_signal("tara_firmware/motor1/signal", &motor1_signal );
+ros::Subscriber<std_msgs::Float32> sub_motor2_signal("tara_firmware/motor2/signal", &motor2_signal );
+ros::Subscriber<std_msgs::Float32> sub_motor1_signal("tara_firmware/motor1/signal", &motor1_signal );
 
 ros::Subscriber<std_msgs::Bool> sub_motor2_state("tara_firmware/motor2/change_state", &motor2_state );
 ros::Subscriber<std_msgs::Bool> sub_motor1_state("tara_firmware/motor1/change_state", &motor1_state );

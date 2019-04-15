@@ -5,11 +5,11 @@
 
   <rosparam param="ticks_meter">4287</rosparam>
 
-  <node pkg="tara_firmware" type="pid_velocity.py" name="lpid_velocity">
-      <remap from="wheel" to="encoder2"/>
-      <remap from="motor_cmd" to="lmotor_cmd"/>
-      <remap from="wheel_vtarget" to="lwheel_vtarget"/>
-      <remap from="wheel_vel" to="lwheel_vel"/>
+  <node pkg="tara_firmware" type="pid_velocity.py" name="pid_velocity2">
+      <remap from="wheel" to="tara_firmware/encoder2"/>
+      <remap from="motor_cmd" to="tara_firmware/motor2_cmd"/>
+      <remap from="wheel_vtarget" to="tara_firmware/wheel2_vtarget"/>
+      <remap from="wheel_vel" to="tara_firmware/wheel2_vel"/>
       <rosparam param="Kp">200</rosparam>
       <rosparam param="Ki">200</rosparam>
       <rosparam param="Kd">0</rosparam>
@@ -19,11 +19,11 @@
       <rosparam param="timeout_ticks">4</rosparam>
       <rosparam param="rolling_pts">5</rosparam>
   </node>
-  <node pkg="tara_firmware" type="pid_velocity.py" name="rpid_velocity">
-      <remap from="wheel" to="encoder1"/>
-      <remap from="motor_cmd" to="rmotor_cmd"/>
-      <remap from="wheel_vtarget" to="rwheel_vtarget"/>
-      <remap from="wheel_vel" to="rwheel_vel"/>
+  <node pkg="tara_firmware" type="pid_velocity.py" name="pid_velocity1">
+      <remap from="wheel" to="tara_firmware/encoder1"/>
+      <remap from="motor_cmd" to="tara_firmware/motor1_cmd"/>
+      <remap from="wheel_vtarget" to="tara_firmware/wheel1_vtarget"/>
+      <remap from="wheel_vel" to="tara_firmware/wheel1_vel"/>
       <rosparam param="Kp">200</rosparam>
       <rosparam param="Ki">200</rosparam>
       <rosparam param="Kd">0</rosparam>
@@ -37,14 +37,14 @@
   <!--<node pkg="tara_firmware" type="virtual_joystick.py" name="virtual_joystick" output="screen"/>
   -->
   <node pkg="tara_firmware" type="twist_to_motors.py" name="twist_to_motors" output="screen">
-    <rosparam param="base_width">0.245</rosparam>
+    <rosparam param="base_width">0.3036</rosparam>
   </node>
   <param name="robot_description" textfile="$(find tara_firmware)/tf/tara.urdf" />
 
   <!--<node pkg="rviz" type="rviz" name="rviz" output="screen"/>-->
   <node pkg="tara_firmware" type="diff_tf.py" name="diff_tf">
      <rosparam param="rate">8.0</rosparam>
-     <rosparam param="base_width">0.245</rosparam>
+     <rosparam param="base_width">0.3036</rosparam>
   </node>
   <node name="robot_state_publisher" pkg="robot_state_publisher" type="state_publisher" /> 
 </launch>

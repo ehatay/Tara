@@ -1,5 +1,5 @@
 import rospy
-from std_msgs.msg import Int16, Bool
+from std_msgs.msg import Int16, Bool, Float32
 from Tkinter import *
 
 class motor_test_ui:
@@ -13,8 +13,8 @@ class motor_test_ui:
         self.motor1_dir = True # True for forward, False for backward
         self.motor2_dir = True
 
-        self.motor1_signal_pub = rospy.Publisher('tara_firmware/motor1/signal', Int16, queue_size = 1)
-        self.motor2_signal_pub = rospy.Publisher('tara_firmware/motor2/signal', Int16, queue_size = 1)
+        self.motor1_signal_pub = rospy.Publisher('tara_firmware/motor1/signal', Float32, queue_size = 1)
+        self.motor2_signal_pub = rospy.Publisher('tara_firmware/motor2/signal', Float32, queue_size = 1)
         self.motor1_state_pub = rospy.Publisher('tara_firmware/motor1/change_state', Bool, queue_size = 1)
         self.motor2_state_pub = rospy.Publisher('tara_firmware/motor2/change_state', Bool, queue_size = 1)
 
@@ -93,8 +93,8 @@ class motor_test_ui:
         
 
     def base_move(self, state):
-        cmd1 = Int16()
-        cmd2 = Int16()
+        cmd1 = Float32()
+        cmd2 = Float32()
         speed = 30
         if(state == 0): # STOP
             cmd1.data = 0
@@ -148,7 +148,7 @@ class motor_test_ui:
                 print("Motor1 forward")
             self.motor1_dir = not self.motor1_dir
             mult = 1 if self.motor1_dir else -1
-            self.motor1_signal_pub.publish(Int16(mult * 10))
+            self.motor1_signal_pub.publish(Float32(mult * 10))
         elif(motor_num == 2):
             if(self.motor2_dir):
                 print("Motor2 backward")
@@ -156,7 +156,7 @@ class motor_test_ui:
                 print("Motor2 forward")
             self.motor2_dir = not self.motor2_dir
             mult = 1 if self.motor2_dir else -1
-            self.motor2_signal_pub.publish(Int16(mult * 10))
+            self.motor2_signal_pub.publish(Float32(mult * 10))
         self.update_state_text(motor_num)
 
     def change_motor_state(self, motor_num):

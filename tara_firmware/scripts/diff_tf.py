@@ -49,8 +49,8 @@ class DifferentialDriveController():
         self.dr = 0
         self.then = rospy.Time.now()
         
-        rospy.Subscriber("encoder2", Int16, self.lwheelCallback)
-        rospy.Subscriber("encoder1", Int16, self.rwheelCallback)
+        rospy.Subscriber("tara_firmware/encoder2", Int16, self.lwheelCallback)
+        rospy.Subscriber("tara_firmware/encoder1", Int16, self.rwheelCallback)
         self.odomPub = rospy.Publisher("odom", Odometry, queue_size=10)
         self.odomBroadcaster = TransformBroadcaster()
         

@@ -5,7 +5,7 @@ import rospy
 from std_msgs.msg import Int16
 
 class Encoder():
-	def __init__(self, a, b, s, device_name = "encoder", printToScreen = False, rostopic = ""):
+	def __init__(self, a, b, device_name = "encoder", printToScreen = False, rostopic = ""):
 		self.counter = 0
 		self.ros = rostopic
 		print device_name + " initiated with topic: " + rostopic
@@ -19,21 +19,10 @@ class Encoder():
 		self.Current_EncB_Status = 0
 		self.EncAPin = a
 		self.EncBPin = b
-		self.EncSPin = s
 		GPIO.setwarnings(False)
 		GPIO.setmode(GPIO.BOARD)
 		GPIO.setup(self.EncAPin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 		GPIO.setup(self.EncBPin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-		#GPIO.setup(self.EncSPin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-		#self.RotaryClear()
-
-	#def RotaryClear(self):
-	#	GPIO.add_event_detect(self.EncSPin, GPIO.FALLING, callback=self.clear)
-	
-	#def clear(self, ev=None):
-	#	self.counter = 0
-	#	self.PublishCounter()
-	#	time.sleep(1)
 
 	def testLoop(self):
 		while True:

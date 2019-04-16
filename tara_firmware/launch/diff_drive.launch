@@ -7,7 +7,7 @@
 
   <node pkg="tara_firmware" type="pid_velocity.py" name="pid_velocity2">
       <remap from="wheel" to="tara_firmware/encoder2"/>
-      <remap from="motor_cmd" to="tara_firmware/motor2_cmd"/>
+      <remap from="motor_cmd" to="tara_firmware/motor2/signal"/>
       <remap from="wheel_vtarget" to="tara_firmware/wheel2_vtarget"/>
       <remap from="wheel_vel" to="tara_firmware/wheel2_vel"/>
       <rosparam param="Kp">200</rosparam>
@@ -21,7 +21,7 @@
   </node>
   <node pkg="tara_firmware" type="pid_velocity.py" name="pid_velocity1">
       <remap from="wheel" to="tara_firmware/encoder1"/>
-      <remap from="motor_cmd" to="tara_firmware/motor1_cmd"/>
+      <remap from="motor_cmd" to="tara_firmware/motor1/signal"/>
       <remap from="wheel_vtarget" to="tara_firmware/wheel1_vtarget"/>
       <remap from="wheel_vel" to="tara_firmware/wheel1_vel"/>
       <rosparam param="Kp">200</rosparam>

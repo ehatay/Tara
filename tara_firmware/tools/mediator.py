@@ -10,13 +10,13 @@ class Mediator():
 		self.motor2_signal_pub = rospy.Publisher("tara_firmware/motor2/signal", Float32, queue_size = 5)
 
 	def motor1_cmd(self, msg):
-		divider = 3.0
+		divider = 1.0
 		to_send = Float32()
 		to_send.data = msg.data / divider
 		self.motor1_signal_pub.publish(to_send)
 	
 	def motor2_cmd(self, msg):
-		divider = 3.0
+		divider = 1.0
 		to_send = Float32()
 		to_send.data = msg.data / divider
 		self.motor2_signal_pub.publish(to_send)

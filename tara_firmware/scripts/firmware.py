@@ -11,7 +11,7 @@ class Encoder():
 		print device_name + " initiated with topic: " + rostopic
 		if(self.ros):
 			rospy.init_node(device_name + "_processor", anonymous=True)
-			self.publisher = rospy.Publisher(rostopic, Int16, queue_size=10)
+			self.publisher = rospy.Publisher(rostopic, Int16, queue_size=10)	
 		self.printToScreen = printToScreen
 		self.flag = 0
 		self.name = device_name
@@ -23,7 +23,6 @@ class Encoder():
 		GPIO.setmode(GPIO.BOARD)
 		GPIO.setup(self.EncAPin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 		GPIO.setup(self.EncBPin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-
 	def testLoop(self):
 		while True:
 			self.CheckEncoderState()

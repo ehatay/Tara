@@ -34,9 +34,9 @@ def check_cmd(cmd):
 	elif(len(splitted) == 2):
 		vel = Twist()
 		try:
-			vel.angular.z = float(splitted[0]) - 50
-			vel.linear.x = (float(splitted[1].split('\r')[0]) - 50) / (-100)
-			vel.linear.x /= 4
+			vel.angular.z = -float(splitted[0])/50
+			vel.linear.x = (float(splitted[1].split('\r')[0]))/50
+			vel.linear.x /= 1
 		except(Exception):
 			pass
 		return vel

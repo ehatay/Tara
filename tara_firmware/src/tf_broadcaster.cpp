@@ -14,7 +14,7 @@ int main(int argc, char** argv){
 		broadcaster.sendTransform(
 			tf::StampedTransform(
 				tf::Transform(tf::Quaternion(0, 0, 0, 1), tf::Vector3(0.1778, 0.0, 0.1395)),
-				ros::Time::now(),"/base_link", "/astra_link"));
+				ros::Time::now(),"/base_link", "/camera_link"));
 		r.sleep();
 	}
 }

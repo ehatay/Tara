@@ -6,54 +6,24 @@
 ros::NodeHandle nh;
 
 /* Right motor */
-const int motor1_pwm = 11;
-const int motor1_en = 12;
-const int motor1_dir = 13;
+const int motor1_l_pwm = 5;
+const int motor1__l_en = 3;
+const int motor1_r_en = 4;
+const int motor1_r_pwm = 6;
+
 boolean motor1_stopped = true;
 boolean motor1_enabled = false;
-boolean motor1_forward = true;
 
 /* Left motor */
-const int motor2_pwm = 10;
-const int motor2_en = 8;
-const int motor2_dir = 9;
+const int motor2_l_pwm = 10;
+const int motor2__l_en = 8;
+const int motor2_r_en = 9;
+const int motor2_r_pwm = 11;
+
 boolean motor2_stopped = true;
 boolean motor2_enabled = false;
-boolean motor2_forward = true;
 
 const int EMF_wait_buffer_msecs = 50;
-
-void change_motor_direction (int motor, boolean forward)
-{
-  if(motor == 1)
-  {
-    motor1_forward = forward;
-    if(forward)
-    {
-      digitalWrite(motor1_dir, HIGH);
-      delay(EMF_wait_buffer_msecs);
-    }
-    else
-    {
-      digitalWrite(motor1_dir, LOW);
-      delay(EMF_wait_buffer_msecs);
-    }
-  }
-  else if(motor == 2)
-  {
-    motor2_forward = forward;
-    if(forward)
-    {
-      digitalWrite(motor2_dir, HIGH);
-      delay(EMF_wait_buffer_msecs);
-    }
-    else
-    {
-      digitalWrite(motor2_dir, LOW);
-      delay(EMF_wait_buffer_msecs);
-    }
-  }
-}
 
 void slow_stop_motor(int motor)
 {
@@ -61,13 +31,15 @@ void slow_stop_motor(int motor)
   {
     motor1_enabled = false;
     motor1_stopped = true; 
-    digitalWrite(motor1_en, LOW);
+    digitalWrite(motor1_r_en, LOW);    
+    digitalWrite(motor1_l_en, LOW);
   }
   else if (motor == 2)
   {
     motor2_enabled = false;
     motor2_stopped = true;
-    digitalWrite(motor2_en, LOW);
+    digitalWrite(motor2_r_en, LOW);
+    digitalWrite(motor2_l_en, LOW);
   }
 }
 
@@ -75,12 +47,14 @@ void enable_motor(int motor)
 {
   if(motor == 1)
   {
-    digitalWrite(motor1_en, HIGH);
+    digitalWrite(motor1_r_en, HIGH);
+    digitalWrite(motor1_l_en, HIGH);
     motor1_enabled = true;
   }
   else if (motor == 2)
   {
-    digitalWrite(motor2_en, HIGH);
+    digitalWrite(motor2_r_en, HIGH);
+    digitalWrite(motor2_l_en, HIGH);
     motor2_enabled = true;
   }
 }
@@ -90,62 +64,72 @@ void quick_stop_motor(int motor)
   if(motor == 1)
   {
     motor1_stopped = true;
+    analogWrite(motor1_l_pwm, 0);
+    analogWrite(motor1_r_pwm, 0);
   }
   else if (motor == 2)
   {
+    analogWrite(motor2_r_pwm, 0);
+    analogWrite(motor2_l_pwm, 0);
     motor2_stopped = true;
   }
 }
 
 void motor1_signal( const std_msgs::Float32& msg)
 {
-  int cmd = msg.data;
   if(msg.data < 0)
   {
-    if(motor1_forward)
-      change_motor_direction(1,false);
+    motor1_forward = false;
+    digitalWrite(motor1_l_en, LOW);
+    analogWrite(motor1_l_pwm, 0);
+    analogWrite(motor1_r_pwm, abs(msg.data));
   }
-  else if (msg.data > 0)
+  else if(msg.data > 0)
   {
-    if(!motor1_forward)
-      change_motor_direction(1,true);
+    motor1_forward = true;
+    digitalWrite(motor1_r_en, LOW);
+    analogWrite(motor1_r_pwm, 0);
+    analogWrite(motor1_l_pwm, abs(msg.data));
   }
   else if (msg.data == 0)
   {
     quick_stop_motor(1);
   }
-  analogWrite(motor1_pwm, abs(msg.data));
 }
 
 void motor2_signal( const std_msgs::Float32& msg)
 {
   if(msg.data < 0)
   {
-    if(motor2_forward)
-      change_motor_direction(2,false);
+    motor2_forward = false;
+    digitalWrite(motor2_l_en, LOW);
+    analogWrite(motor2_l_pwm, 0);
+    analogWrite(motor2_r_pwm, abs(msg.data));
   }
-  else if (msg.data > 0)
+  else if(msg.data > 0)
   {
-    if(!motor2_forward)
-      change_motor_direction(2,true);
+    motor2_forward = true;
+    digitalWrite(motor2_r_en, LOW);
+    analogWrite(motor2_r_pwm, 0);
+    analogWrite(motor2_l_pwm, abs(msg.data));
   }
   else if (msg.data == 0)
   {
-    if(motor2_stopped == false)
-      quick_stop_motor(2);
+    quick_stop_motor(2);
   }
-  analogWrite(motor2_pwm, abs(msg.data));
 }
 
 void motor1_state( const std_msgs::Bool& msg)
 {
   if(msg.data)
   {
-    enable_motor(1);
+    digitalWrite(motor1_l_en, HIGH);
+    digitalWrite(motor1_r_en, HIGH);
   }
   else
   {
-    slow_stop_motor(1); 
+    digitalWrite(motor1_r_en, LOW);
+    digitalWrite(motor1_l_en, LOW);
   }
 }
 
@@ -153,11 +137,13 @@ void motor2_state( const std_msgs::Bool& msg)
 {
   if(msg.data)
   {
-    enable_motor(2);
+    digitalWrite(motor2_l_en, HIGH);
+    digitalWrite(motor2_r_en, HIGH);
   }
   else
   {
-    slow_stop_motor(2); 
+    digitalWrite(motor2_r_en, LOW);
+    digitalWrite(motor2_l_en, LOW);
   }
 }
 ros::Subscriber<std_msgs::Float32> sub_motor2_signal("tara_firmware/motor2/signal", &motor2_signal );
@@ -166,43 +152,36 @@ ros::Subscriber<std_msgs::Float32> sub_motor1_signal("tara_firmware/motor1/signa
 ros::Subscriber<std_msgs::Bool> sub_motor2_state("tara_firmware/motor2/change_state", &motor2_state );
 ros::Subscriber<std_msgs::Bool> sub_motor1_state("tara_firmware/motor1/change_state", &motor1_state );
 
-//std_msgs::Float32 battery1_v, battery2_v;
-//ros::Publisher battery1_voltage_pub("tara_firmware/battery1_voltage", &battery1_v);
-//ros::Publisher battery2_voltage_pub("tara_firmware/battery2_voltage", &battery2_v);
-
 void setup()
 {
-  pinMode(motor1_pwm, OUTPUT);
-  pinMode(motor2_pwm, OUTPUT);
-  pinMode(motor1_en, OUTPUT);
-  pinMode(motor2_en, OUTPUT);
-  pinMode(motor1_dir, OUTPUT);
-  pinMode(motor2_dir, OUTPUT);
   
-  //pinMode(A0, INPUT);
-  //pinMode(A1, INPUT);
-  
-  digitalWrite(motor1_en, LOW);
-  digitalWrite(motor2_en, LOW);
-  digitalWrite(motor1_dir, HIGH);
-  digitalWrite(motor2_dir, HIGH);
+  pinMode(motor1_r_pwm, OUTPUT);
+  pinMode(motor2_r_pwm, OUTPUT);
+  pinMode(motor1_l_pwm, OUTPUT);
+  pinMode(motor2_l_pwm, OUTPUT);
+  pinMode(motor1_l_en, OUTPUT);
+  pinMode(motor1_r_en, OUTPUT);
+  pinMode(motor2_r_en, OUTPUT);
+  pinMode(motor2_l_en, OUTPUT);
+    
+  digitalWrite(motor1_l_en, HIGH);
+  digitalWrite(motor1_r_en, HIGH);
 
+  digitalWrite(motor2_r_en, HIGH);
+  digitalWrite(motor2_l_en, HIGH);
+  
+  motor1_enabled = true;
+  motor2_enabled = true;
+  
   nh.initNode();
   nh.subscribe(sub_motor1_signal);
   nh.subscribe(sub_motor2_signal);
   nh.subscribe(sub_motor1_state);
   nh.subscribe(sub_motor2_state);
-
-  //nh.advertise(battery1_voltage_pub);
-  //nh.advertise(battery2_voltage_pub);
 }
 
 void loop()
 {
-  //battery1_v.data = (analogRead(A0) * 5.0 / 1024.0) / (7500.0/(37500.0));
-  //battery2_v.data = (analogRead(A1) * 5.0 / 1024.0) / (7500.0/(37500.0));
-  //battery1_voltage_pub.publish(&battery1_v);
-  //battery2_voltage_pub.publish(&battery2_v);
   nh.spinOnce();
   delay(1);
 }

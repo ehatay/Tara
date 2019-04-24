@@ -5,7 +5,6 @@ project(tara_2dnav)
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
 find_package(catkin REQUIRED COMPONENTS
-  tara_tf
   tara_firmware
   move_base
   roscpp
@@ -102,7 +101,7 @@ find_package(catkin REQUIRED COMPONENTS
 ## DEPENDS: system dependencies of this project that dependent projects also need
 catkin_package(
    LIBRARIES tara_2dnav
-   CATKIN_DEPENDS tara_tf move_base roscpp 
+   CATKIN_DEPENDS  move_base roscpp 
 )
 
 ###########

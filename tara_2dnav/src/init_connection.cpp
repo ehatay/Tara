@@ -13,8 +13,7 @@ int main(int argc, char** argv)
   n.getParam("/ip", ip);
   n.getParam("/user", user);
 
- //restart rosbeam-bridge
-  cmd = "ssh " + user + "@" + ip + " \"init_firmware.sh\"";
+  cmd = "ssh " + user + "@" + ip + " \"source /home/" + user + "/catkin_ws/devel/setup.bash ; init_firmware.sh\"";
   system(cmd.c_str());    
 
 }

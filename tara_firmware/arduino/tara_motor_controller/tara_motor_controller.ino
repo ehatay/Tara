@@ -25,7 +25,6 @@ boolean motor2_forward;
 boolean motor2_stopped = true;
 boolean motor2_enabled = false;
 
-const int EMF_wait_buffer_msecs = 50;
 
 void slow_stop_motor(int motor)
 {

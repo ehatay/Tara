@@ -4,10 +4,9 @@ plugins:
   - {name: obstacles,  type: "costmap_2d::ObstacleLayer"}
   - {name: inflation,  type: "costmap_2d::InflationLayer"}
 
-obstacle_range: 4.0
-raytrace_range: 4.5 
-#footprint: [[0.2159, 0.1778], [0.2159, -0.1778], [-0.2159, -0.1778], [-0.2159, 0.1778]]
-footprint: [[0.1516, 0.2187], [0.1516, -0.2187], [-0.3302, -0.2187], [-0.3302, 0.2187]]
+obstacle_range: 6.0
+raytrace_range: 6.5 
+footprint: [[0.1905, 0.4191], [0.1905, -0.4191], [-0.3683, -0.4191], [-0.3683, 0.4191]]
 
 obstacles: 
   observation_sources: astra_sensor

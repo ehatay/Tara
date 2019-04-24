@@ -1,14 +1,13 @@
 <?xml version="1.0"?>
-        
+		
 <launch>
-        <param name="use_sim_time" value="false" />
+	<param name="use_sim_time" value="false" />
 
-       
-        <include file="$(find astra_launch)/launch/astrapro.launch"/>a
-	<!-- Convert depth data into laserscan (for amcl)-->
-        <node pkg="depthimage_to_laserscan" type="depthimage_to_laserscan" name="depthimage_to_laserscan_astra">
-                <param name="scan_height" value="5"/>
+	<include file="$(find astra_launch)/launch/astrapro.launch"/>a
+
+	<node pkg="depthimage_to_laserscan" type="depthimage_to_laserscan" name="depthimage_to_laserscan_astra">
+		<param name="scan_height" value="5"/>
 		<param name="output_frame_id" value="camera_depth_frame"/>
-                <remap from="image" to="/camera/depth/image"/>
-        </node>      
+		<remap from="image" to="/camera/depth/image"/>
+	</node>      
 </launch>

@@ -1,3 +1,4 @@
+<?xml version="1.0"?>
 <launch>
 	<node pkg="tara_app" name="tara_app" type="tara_controller.py" output="screen"/>
 </launch>

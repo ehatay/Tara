@@ -10,8 +10,8 @@
       <remap from="motor_cmd" to="tara_firmware/motor2/signal"/>
       <remap from="wheel_vtarget" to="tara_firmware/wheel2_vtarget"/>
       <remap from="wheel_vel" to="tara_firmware/wheel2_vel"/>
-      <rosparam param="Kp">200</rosparam>
-      <rosparam param="Ki">2</rosparam>
+      <rosparam param="Kp">100</rosparam>
+      <rosparam param="Ki">1</rosparam>
       <rosparam param="Kd">0</rosparam>
       <rosparam param="out_min">-255</rosparam>
       <rosparam param="out_max">255</rosparam>
@@ -24,8 +24,8 @@
       <remap from="motor_cmd" to="tara_firmware/motor1/signal"/>
       <remap from="wheel_vtarget" to="tara_firmware/wheel1_vtarget"/>
       <remap from="wheel_vel" to="tara_firmware/wheel1_vel"/>
-      <rosparam param="Kp">200</rosparam>
-      <rosparam param="Ki">2</rosparam>
+      <rosparam param="Kp">100</rosparam>
+      <rosparam param="Ki">1</rosparam>
       <rosparam param="Kd">0</rosparam>
       <rosparam param="out_min">-255</rosparam>
       <rosparam param="out_max">255</rosparam>

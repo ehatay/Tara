@@ -9,14 +9,6 @@ find_package(catkin REQUIRED COMPONENTS
   tara_firmware
   move_base
   roscpp
-  #nav_core
-  #nav_msgs
-  #base_local_planner
-  #dwa_local_planner
-  #amcl
-  #map_server
-  #costmap_2d
-  #pluginlib
 )
 
 ## System dependencies are found with CMake's conventions
@@ -110,8 +102,7 @@ find_package(catkin REQUIRED COMPONENTS
 ## DEPENDS: system dependencies of this project that dependent projects also need
 catkin_package(
    LIBRARIES tara_2dnav
-   CATKIN_DEPENDS tara_tf move_base roscpp #nav_core nav_msgs base_local_planner pluginlib dwa_local_planner map_server amcl
-#  DEPENDS system_lib
+   CATKIN_DEPENDS tara_tf move_base roscpp 
 )
 
 ###########
@@ -124,11 +115,6 @@ catkin_package(
 include_directories(
   ${catkin_INCLUDE_DIRS}
 )
-
-## Declare a C++ library
-# add_library(beam_2dnav
-#   src/${PROJECT_NAME}/beam_2dnav.cpp
-# )
 
 ## Add cmake target dependencies of the library
 ## as an example, code may need to be generated before libraries
@@ -143,6 +129,8 @@ include_directories(
 # add_dependencies(beam_2dnav_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 
 ## Specify libraries to link a library or executable target against
+add_executable(init_connection src/init_connection.cpp)
+target_link_libraries(init_connection ${catkin_LIBRARIES} )
 
 
 #############
